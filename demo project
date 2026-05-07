@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///C:/Users/admin/Downloads/gramvaani-dual-mode%20(1).html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GramVaani — Works on Any Phone</title>
+<link href="./GramVaani —_files/css2" rel="stylesheet">
+<style>
+:root {
+  --saffron: #FF6B00;
+  --saffron2: #FF9F40;
+  --green: #1B6B3A;
+  --green2: #2ECC71;
+  --navy: #0A1628;
+  --navy2: #152238;
+  --cream: #FFF8F0;
+  --white: #FFFFFF;
+  --g50: #F5F5F0;
+  --g100: #E8E6DF;
+  --g300: #B8B5AC;
+  --g500: #7A7870;
+  --g700: #3A3830;
+  --red: #E53935;
+  --blue: #1565C0;
+  --gold: #F59E0B;
+  --radius: 18px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.12);
+  --shadow-sm: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ═══ LANDING / MODE SELECT ═══ */
+.landing {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(160deg, #0A1628 0%, #1B3A5A 50%, #0A2818 100%);
+  position: relative;
+  overflow: hidden;
+}
+.landing::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,107,0,0.08) 0%, transparent 70%);
+  top: -200px; right: -200px;
+  pointer-events: none;
+}
+.landing::after {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(46,204,113,0.06) 0%, transparent 70%);
+  bottom: -100px; left: -100px;
+  pointer-events: none;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.6s ease forwards;
+}
+.brand-logo {
+  width: 80px; height: 80px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--saffron), var(--saffron2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 38px;
+  box-shadow: 0 12px 40px rgba(255,107,0,0.3);
+  margin-bottom: 1rem;
+}
+.brand-name {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 36px; font-weight: 800;
+  background: linear-gradient(135deg, #FF9F40, #FFD580);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+}
+.brand-tagline {
+  font-size: 13px; color: rgba(255,255,255,0.5);
+  text-align: center; margin-top: 4px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+
+.mode-title {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 22px; font-weight: 700;
+  text-align: center; margin-bottom: .5rem;
+  animation: fadeUp 0.6s ease 0.1s forwards; opacity: 0;
+}
+.mode-sub {
+  font-size: 13px; color: rgba(255,255,255,0.5);
+  text-align: center; margin-bottom: 2rem;
+  animation: fadeUp 0.6s ease 0.2s forwards; opacity: 0;
+}
+
+.mode-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%; max-width: 400px;
+  animation: fadeUp 0.6s ease 0.3s forwards; opacity: 0;
+}
+
+.mode-card {
+  border-radius: 20px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  border: 1.5px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+.mode-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.mode-card:hover { transform: translateY(-4px); }
+.mode-card:hover::before { opacity: 1; }
+
+.mode-card.keypad {
+  background: rgba(255,107,0,0.12);
+  border-color: rgba(255,107,0,0.3);
+}
+.mode-card.keypad:hover {
+  background: rgba(255,107,0,0.2);
+  border-color: var(--saffron);
+  box-shadow: 0 8px 32px rgba(255,107,0,0.2);
+}
+.mode-card.smartphone {
+  background: rgba(27,107,58,0.12);
+  border-color: rgba(27,107,58,0.3);
+}
+.mode-card.smartphone:hover {
+  background: rgba(27,107,58,0.2);
+  border-color: var(--green2);
+  box-shadow: 0 8px 32px rgba(46,204,113,0.2);
+}
+
+.mode-icon { font-size: 44px; margin-bottom: .8rem; display: block; }
+.mode-label {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 16px; font-weight: 700; margin-bottom: 4px;
+}
+.mode-desc { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+.mode-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.mode-card.keypad .mode-badge { background: rgba(255,107,0,0.2); color: var(--saffron2); }
+.mode-card.smartphone .mode-badge { background: rgba(46,204,113,0.2); color: var(--green2); }
+
+.lang-row {
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+  margin-top: 2rem; max-width: 400px;
+  animation: fadeUp 0.6s ease 0.4s forwards; opacity: 0;
+}
+.lang-chip {
+  padding: 5px 12px; border-radius: 20px;
+  font-size: 11px; font-weight: 500;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.6);
+  cursor: pointer; transition: all 0.2s;
+}
+.lang-chip.sel {
+  background: rgba(255,107,0,0.2);
+  border-color: var(--saffron);
+  color: var(--saffron2);
+}
+
+/* ═══ KEYPAD PHONE IVR ═══ */
+.keypad-view {
+  display: none;
+  min-height: 100vh;
+  flex-direction: column;
+  background: linear-gradient(180deg, #1A0A00, #0A0A00);
+  max-width: 380px;
+  margin: 0 auto;
+}
+.keypad-view.active { display: flex; }
+
+/* Simulated phone screen */
+.phone-shell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.phone-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .5rem 0 1rem;
+  font-size: 11px; color: rgba(255,255,255,0.4);
+}
+.phone-signal { display: flex; gap: 2px; align-items: flex-end; }
+.phone-signal span { width: 3px; background: rgba(255,255,255,0.4); border-radius: 1px; }
+.phone-signal span:nth-child(1){height:5px;}.phone-signal span:nth-child(2){height:8px;}.phone-signal span:nth-child(3){height:11px;}.phone-signal span:nth-child(4){height:14px;}
+.phone-battery { font-size: 12px; }
+
+/* Call screen */
+.call-screen {
+  background: linear-gradient(180deg, #0D2B1A, #051208);
+  border-radius: 20px;
+  padding: 1.5rem 1.2rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(46,204,113,0.15);
+  min-height: 200px;
+  display: flex; flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.call-screen::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(46,204,113,0.06) 0%, transparent 60%);
+}
+
+.call-status-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(46,204,113,0.15);
+  border: 1px solid rgba(46,204,113,0.3);
+  border-radius: 20px; padding: 4px 12px;
+  font-size: 11px; font-weight: 600; color: var(--green2);
+  margin-bottom: 1rem;
+}
+.call-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green2); animation: blink 1s infinite; }
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+.ivr-display {
+  width: 100%;
+  background: rgba(0,0,0,0.4);
+  border-radius: 12px;
+  padding: 1rem;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.9);
+  min-height: 100px;
+  position: relative;
+  z-index: 1;
+}
+.ivr-line { margin-bottom: 4px; }
+.ivr-line.highlight { color: var(--green2); font-weight: 600; }
+.ivr-line.press { color: var(--saffron2); }
+.ivr-line.ai { color: #7FDBFF; }
+
+.ivr-input-display {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-top: .8rem;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 18px; letter-spacing: 0.15em;
+  color: var(--saffron2);
+  min-height: 42px;
+  position: relative; z-index: 1;
+}
+.cursor-blink { animation: blink 1s infinite; opacity: .7; }
+
+/* Keypad grid */
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 0 .5rem;
+}
+.key {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 14px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.key:active, .key.pressed {
+  background: rgba(255,107,0,0.25);
+  border-color: var(--saffron);
+  transform: scale(0.94);
+}
+.key-num {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 24px; font-weight: 700; line-height: 1;
+  color: var(--white);
+}
+.key-alpha { font-size: 8px; color: rgba(255,255,255,0.35); letter-spacing: 0.15em; margin-top: 2px; }
+.key.call-key { background: rgba(46,204,113,0.2); border-color: rgba(46,204,113,0.4); }
+.key.call-key .key-num { color: var(--green2); font-size: 20px; }
+.key.call-key:active { background: rgba(46,204,113,0.4); }
+.key.end-key { background: rgba(229,57,53,0.2); border-color: rgba(229,57,53,0.4); }
+.key.end-key .key-num { color: #EF5350; font-size: 20px; }
+.key.end-key:active { background: rgba(229,57,53,0.4); }
+
+.keypad-bottom {
+  padding: 1rem;
+  display: flex; gap: 10px;
+}
+.back-btn-kp {
+  flex: 1; padding: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  font-size: 13px; color: rgba(255,255,255,0.6);
+  cursor: pointer; text-align: center;
+  font-family: 'Noto Sans', sans-serif;
+}
+.sms-btn {
+  flex: 2; padding: 12px;
+  background: rgba(255,107,0,0.2);
+  border: 1px solid rgba(255,107,0,0.4);
+  border-radius: 12px;
+  font-size: 13px; font-weight: 600; color: var(--saffron2);
+  cursor: pointer; text-align: center;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+/* SMS view on keypad phone */
+.sms-view {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  padding: 1rem;
+}
+.sms-view.active { display: flex; }
+.sms-header {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 14px; font-weight: 700;
+  color: var(--saffron2);
+  margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.sms-messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex; flex-direction: column; gap: 8px;
+  margin-bottom: 1rem;
+}
+.sms-bubble {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13px; line-height: 1.6;
+  max-width: 90%;
+}
+.sms-bubble.sent {
+  background: rgba(255,107,0,0.2);
+  border: 1px solid rgba(255,107,0,0.3);
+  align-self: flex-end;
+  color: var(--saffron2);
+  border-bottom-right-radius: 4px;
+}
+.sms-bubble.recv {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  align-self: flex-start;
+  color: rgba(255,255,255,0.85);
+  border-bottom-left-radius: 4px;
+}
+.sms-bubble .from { font-size: 10px; color: var(--green2); font-weight: 600; margin-bottom: 3px; }
+.sms-input-row {
+  display: flex; gap: 8px;
+}
+.sms-txt {
+  flex: 1; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px; padding: 10px 12px;
+  font-size: 13px; color: var(--white);
+  font-family: 'Noto Sans', sans-serif;
+  outline: none;
+}
+.sms-txt:focus { border-color: var(--saffron); }
+.sms-txt::placeholder { color: rgba(255,255,255,0.25); }
+.sms-send-btn {
+  padding: 10px 16px;
+  background: var(--saffron);
+  border: none; border-radius: 10px;
+  color: #fff; font-size: 14px; cursor: pointer;
+}
+
+/* ═══ SMARTPHONE VIEW ═══ */
+.smartphone-view {
+  display: none;
+  min-height: 100vh;
+  flex-direction: column;
+  background: var(--cream);
+  color: var(--navy);
+}
+.smartphone-view.active { display: flex; }
+
+/* Smart Nav */
+.snav {
+  background: var(--white);
+  border-bottom: 1px solid var(--g100);
+  padding: 0 1.2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px; position: sticky; top: 0; z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+.snav-brand { display: flex; align-items: center; gap: 9px; }
+.snav-logo {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--saffron), var(--saffron2));
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+}
+.snav-title { font-family: 'Baloo 2', sans-serif; font-size: 18px; font-weight: 800; color: var(--green); }
+.snav-sub { font-size: 10px; color: var(--g500); }
+.snav-right { display: flex; gap: 7px; }
+.snav-btn {
+  padding: 5px 11px; border-radius: 20px; font-size: 11px; font-weight: 600;
+  cursor: pointer; border: 1.5px solid; transition: all .2s;
+  font-family: 'Noto Sans', sans-serif;
+}
+.snav-btn.toll { background: #FFF3E0; color: var(--saffron); border-color: var(--saffron2); }
+.snav-btn.admin { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+/* Smart Tabs */
+.stabs {
+  display: flex; background: var(--white);
+  border-bottom: 1px solid var(--g100);
+  padding: 0 .8rem; overflow-x: auto;
+}
+.stab {
+  padding: 12px 14px; font-size: 12px; font-weight: 500;
+  color: var(--g500); cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap; transition: all .2s;
+}
+.stab.active { color: var(--green); border-bottom-color: var(--green); font-weight: 600; }
+
+/* Smart screen content */
+.sscreen { display: none; padding: 1.2rem; max-width: 500px; margin: 0 auto; }
+.sscreen.active { display: block; }
+.sscreen.wide { max-width: 100%; }
+
+/* Voice orb */
+.voice-center { text-align: center; padding: .8rem 0 1rem; }
+.lang-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #E8F5EE; color: var(--green);
+  border: 1px solid #A8DFC0; border-radius: 20px;
+  padding: 5px 13px; font-size: 12px; font-weight: 600;
+  margin-bottom: .8rem; cursor: pointer;
+}
+.orb-wrap { position: relative; width: 160px; height: 160px; margin: 0 auto 1rem; }
+.vring { position: absolute; border-radius: 50%; border: 2px solid var(--green); opacity: 0; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.vring.r1{width:160px;height:160px;} .vring.r2{width:188px;height:188px;} .vring.r3{width:216px;height:216px;}
+@keyframes pr{0%{opacity:.5;transform:translate(-50%,-50%) scale(.95)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.15)}}
+.listening .vring.r1{animation:pr 1.4s ease-out infinite;}
+.listening .vring.r2{animation:pr 1.4s ease-out .3s infinite;}
+.listening .vring.r3{animation:pr 1.4s ease-out .6s infinite;}
+.orb {
+  width: 140px; height: 140px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), #2ECC71);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 8px 32px rgba(27,107,58,0.3);
+  transition: all .2s; flex-direction: column; gap: 4px;
+}
+.orb:hover{transform:translate(-50%,-50%) scale(1.04);}
+.orb.listening{background:linear-gradient(135deg,var(--red),#EF5350);box-shadow:0 8px 32px rgba(229,57,53,.3);}
+.orb.processing{background:linear-gradient(135deg,var(--saffron),var(--saffron2));box-shadow:0 8px 32px rgba(255,107,0,.3);}
+.orb-icon{font-size:36px;}.orb-st{font-size:10px;color:#fff;font-weight:700;letter-spacing:.06em;}
+.voice-hint{font-size:12px;color:var(--g500);margin-bottom:.8rem;}
+
+/* TTS bar */
+.tts-bar {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--white); border: 1px solid var(--g100);
+  border-radius: 10px; padding: 7px 11px; margin-bottom:.8rem;
+}
+.tts-lbl{font-size:10px;color:var(--g500);font-weight:700;text-transform:uppercase;letter-spacing:.05em;}
+.tts-sel{flex:1;border:none;background:transparent;font-family:'Noto Sans',sans-serif;font-size:11px;color:var(--navy);outline:none;min-width:80px;}
+.tts-btn{padding:4px 10px;border-radius:7px;font-size:10px;font-weight:600;cursor:pointer;font-family:'Noto Sans',sans-serif;border:none;}
+.tts-btn.speak{background:var(--blue);color:#fff;}
+.tts-btn.listen{background:var(--saffron);color:#fff;}
+
+/* Rec badge */
+.rec-badge{display:none;align-items:center;gap:5px;background:#FEE;color:var(--red);border:1px solid #F4B8B8;border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;margin-bottom:.6rem;}
+.rec-badge.on{display:inline-flex;}
+.rec-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:blink 1s infinite;}
+
+/* Chat */
+.chat-area{max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-bottom:.8rem;padding-right:3px;}
+.chat-area::-webkit-scrollbar{width:3px;}
+.chat-area::-webkit-scrollbar-thumb{background:var(--g300);border-radius:2px;}
+.bubble{max-width:85%;padding:9px 13px;font-size:13px;line-height:1.6;border-radius:13px;}
+.bubble.user{background:var(--green);color:#fff;align-self:flex-end;border-bottom-right-radius:3px;}
+.bubble.ai{background:var(--white);color:var(--navy);align-self:flex-start;border-bottom-left-radius:3px;border:1px solid var(--g100);}
+.ai-lbl{font-size:9px;font-weight:700;color:var(--green);letter-spacing:.06em;margin-bottom:3px;display:block;}
+.typing-dots{display:flex;gap:4px;padding:3px 0;}
+.typing-dots span{width:5px;height:5px;border-radius:50%;background:var(--g300);animation:db 1.2s infinite ease-in-out;}
+.typing-dots span:nth-child(2){animation-delay:.2s;}.typing-dots span:nth-child(3){animation-delay:.4s;}
+@keyframes db{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+.txt-row{display:flex;gap:7px;align-items:center;margin-bottom:1rem;}
+.txt-in{flex:1;padding:10px 13px;border:1.5px solid var(--g100);border-radius:9px;font-family:'Noto Sans',sans-serif;font-size:12px;background:var(--white);color:var(--navy);outline:none;transition:border-color .2s;}
+.txt-in:focus{border-color:var(--green);}
+.txt-in::placeholder{color:var(--g300);}
+.send-btn{width:38px;height:38px;border-radius:9px;background:var(--green);color:#fff;border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+/* Quick prompts */
+.ql{font-size:10px;font-weight:700;color:var(--g500);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;}
+.qp{display:flex;flex-direction:column;gap:6px;}
+.qbtn{background:var(--white);border:1px solid var(--g100);border-radius:9px;padding:9px 12px;font-size:12px;color:var(--navy);cursor:pointer;text-align:left;display:flex;align-items:center;gap:7px;transition:all .2s;}
+.qbtn:hover{border-color:var(--green);background:#E8F5EE;}
+
+/* Schemes */
+.srch-bar{display:flex;align-items:center;gap:7px;background:var(--white);border:1.5px solid var(--g100);border-radius:11px;padding:9px 12px;margin-bottom:.8rem;}
+.srch-bar input{flex:1;border:none;background:transparent;font-family:'Noto Sans',sans-serif;font-size:13px;outline:none;color:var(--navy);}
+.srch-bar input::placeholder{color:var(--g300);}
+.scats{display:flex;gap:6px;overflow-x:auto;padding-bottom:3px;margin-bottom:.8rem;}
+.scat{padding:5px 11px;border-radius:20px;font-size:11px;font-weight:500;border:1.5px solid var(--g100);background:var(--white);cursor:pointer;white-space:nowrap;transition:all .2s;}
+.scat.active{background:var(--green);color:#fff;border-color:var(--green);}
+.slist{display:flex;flex-direction:column;gap:9px;}
+.scard{background:var(--white);border:1px solid var(--g100);border-radius:var(--radius);padding:13px 15px;cursor:pointer;transition:all .2s;border-left:4px solid transparent;}
+.scard:hover{box-shadow:var(--shadow);transform:translateX(2px);}
+.scard.agri{border-left-color:var(--green);} .scard.health{border-left-color:#E06060;} .scard.finance{border-left-color:#4080D0;} .scard.labor{border-left-color:var(--saffron);}
+.s-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5px;}
+.s-name{font-size:13px;font-weight:700;color:var(--navy);}
+.s-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:9px;background:#E8F5EE;color:var(--green);}
+.s-desc{font-size:11px;color:var(--g500);line-height:1.5;margin-bottom:7px;}
+.s-bot{display:flex;gap:6px;flex-wrap:wrap;}
+.s-badge{font-size:10px;padding:3px 8px;border-radius:7px;background:var(--g50);color:var(--g700);border:1px solid var(--g100);}
+.ask-ai{margin-left:auto;font-size:10px;padding:3px 9px;background:var(--green);color:#fff;border:none;border-radius:7px;cursor:pointer;font-family:'Noto Sans',sans-serif;}
+
+/* Toll Free smart */
+.toll-hero-sm{background:linear-gradient(135deg,var(--navy),#1A4A7A);border-radius:var(--radius);padding:1.8rem;text-align:center;margin-bottom:1.2rem;color:#fff;}
+.toll-num{font-size:28px;font-weight:800;font-family:'Baloo 2',sans-serif;color:#7FE8B0;margin:.4rem 0;}
+.call-btn{width:100%;padding:13px;background:var(--saffron);color:#fff;font-size:14px;font-weight:700;border:none;border-radius:var(--radius);cursor:pointer;margin-bottom:.8rem;font-family:'Noto Sans',sans-serif;}
+.ivr-stp{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--g100);}
+.ivr-stp:last-child{border-bottom:none;}
+.ivr-n{width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ivr-t{font-size:12px;color:var(--navy);line-height:1.4;} .ivr-s{font-size:11px;color:var(--g500);}
+
+/* Admin */
+.adm-header{background:var(--navy);color:#fff;padding:1rem 1.2rem;border-radius:var(--radius);margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;}
+.adm-header h2{font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;}
+.adm-header p{font-size:11px;color:rgba(255,255,255,.55);}
+.exit-btn{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:9px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Noto Sans',sans-serif;}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:1rem;}
+.kpi{background:var(--white);border:1px solid var(--g100);border-radius:12px;padding:12px;text-align:center;}
+.kpi-n{font-size:22px;font-weight:800;font-family:'Baloo 2',sans-serif;}
+.kpi-l{font-size:10px;color:var(--g500);margin-top:2px;}
+.kpi.g .kpi-n{color:var(--green);}.kpi.b .kpi-n{color:var(--blue);}.kpi.o .kpi-n{color:var(--saffron);}.kpi.r .kpi-n{color:var(--red);}
+.adm-tabs{display:flex;gap:7px;margin-bottom:.8rem;flex-wrap:wrap;}
+.adm-tab{padding:7px 14px;border-radius:8px;font-size:12px;font-weight:500;border:1.5px solid var(--g100);background:var(--white);cursor:pointer;font-family:'Noto Sans',sans-serif;transition:all .2s;}
+.adm-tab.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+.sec-title{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.05em;text-transform:uppercase;margin-bottom:.6rem;}
+.tbl-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--g100);margin-bottom:1rem;}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:11px;}
+thead{background:var(--g50);}
+thead th{padding:9px 11px;text-align:left;font-weight:600;color:var(--g700);font-size:10px;white-space:nowrap;border-bottom:1px solid var(--g100);}
+tbody td{padding:9px 11px;border-bottom:1px solid var(--g100);vertical-align:middle;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:var(--g50);}
+.td-n{font-weight:600;color:var(--navy);}
+.td-lb{display:inline-block;padding:2px 7px;border-radius:8px;font-size:9px;font-weight:600;background:#E8F5EE;color:var(--green);}
+.td-st{display:inline-block;padding:2px 7px;border-radius:8px;font-size:9px;font-weight:600;}
+.td-st.active{background:#E8F5EE;color:var(--green);}.td-st.pending{background:#FFF3E8;color:var(--saffron);}.td-st.resolved{background:var(--g50);color:var(--g500);}
+.vbtn{background:var(--navy);color:#fff;border:none;border-radius:6px;padding:3px 9px;font-size:9px;cursor:pointer;font-family:'Noto Sans',sans-serif;}
+
+/* Call recording */
+.crec{background:var(--white);border:1px solid var(--g100);border-radius:12px;padding:12px 14px;margin-bottom:9px;}
+.crec-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.crec-name{font-size:13px;font-weight:700;}
+.crec-info{font-size:11px;color:var(--g500);margin-bottom:7px;line-height:1.5;}
+.waverow{display:flex;align-items:center;gap:6px;margin-bottom:7px;}
+.wbars{display:flex;align-items:center;gap:2px;flex:1;height:26px;cursor:pointer;}
+.wbars span{display:inline-block;width:3px;background:var(--g100);border-radius:2px;transition:background .3s;}
+.wbars.playing span{background:var(--green);}
+.pbtn{width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;border:none;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.prog-wrap{flex:1;height:4px;background:var(--g100);border-radius:2px;}
+.prog-fill{height:100%;background:var(--green);border-radius:2px;width:0%;transition:width .5s linear;}
+.transcript-box{font-size:11px;color:var(--g700);background:var(--g50);padding:8px 10px;border-radius:8px;margin-bottom:7px;line-height:1.6;}
+.ctags{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+.ctag{font-size:10px;padding:2px 8px;border-radius:8px;background:var(--g50);color:var(--g700);border:1px solid var(--g100);}
+.dl-btn{font-size:10px;padding:3px 9px;background:var(--navy);color:#fff;border:none;border-radius:7px;cursor:pointer;font-family:'Noto Sans',sans-serif;}
+
+/* Map */
+.map-box{background:var(--white);border:1px solid var(--g100);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem;}
+.map-legend{display:flex;gap:12px;padding:8px 13px;border-top:1px solid var(--g100);flex-wrap:wrap;}
+.map-legend-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--g500);}
+.map-dot{width:8px;height:8px;border-radius:50%;}
+.origin-list{display:flex;flex-direction:column;gap:7px;}
+.oc{background:var(--white);border:1px solid var(--g100);border-radius:11px;padding:10px 13px;display:flex;align-items:center;gap:11px;}
+.oc-info{flex:1;}.oc-city{font-size:12px;font-weight:600;}.oc-state{font-size:10px;color:var(--g500);}
+.oc-bar{height:4px;background:var(--g100);border-radius:2px;margin-top:4px;}
+.oc-bar-fill{height:100%;background:var(--green);border-radius:2px;}
+.oc-count{font-size:18px;font-weight:800;color:var(--green);font-family:'Baloo 2',sans-serif;}
+
+/* Customer detail modal */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:1rem;}
+.overlay.open{display:flex;}
+.modal{background:var(--white);border-radius:var(--radius);padding:1.4rem;max-width:420px;width:100%;max-height:85vh;overflow-y:auto;animation:mi .25s ease;}
+@keyframes mi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.modal h3{font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:800;margin-bottom:3px;}
+.modal-sub{font-size:12px;color:var(--g500);margin-bottom:1rem;}
+.modal-body{font-size:12px;line-height:1.7;color:var(--g700);}
+.modal-body strong{color:var(--navy);}
+.modal-body ul{padding-left:1.2rem;margin:.4rem 0;}
+.m-close{width:100%;padding:11px;background:var(--green);color:#fff;border:none;border-radius:11px;font-size:13px;font-weight:600;cursor:pointer;margin-top:1rem;font-family:'Noto Sans',sans-serif;}
+.dr{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--g100);font-size:12px;}
+.dr:last-child{border-bottom:none;}.dl{color:var(--g500);font-weight:500;}.dv{color:var(--navy);font-weight:600;text-align:right;max-width:200px;}
+
+/* Toast */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:9px 18px;border-radius:20px;font-size:12px;font-weight:500;opacity:0;transition:all .3s;pointer-events:none;z-index:600;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-8px);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══ DEVICE DETECTION SPLASH ═══ */
+.detect-splash {
+  position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(160deg, #0A1628 0%, #1B3A5A 50%, #0A2818 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 1.2rem;
+  transition: opacity 0.5s ease;
+}
+.detect-splash.fade-out { opacity: 0; pointer-events: none; }
+.detect-radar {
+  width: 90px; height: 90px; border-radius: 50%;
+  background: rgba(255,107,0,0.1);
+  border: 2px solid rgba(255,107,0,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 38px;
+  position: relative;
+  animation: radarPulse 1.2s ease-in-out infinite;
+}
+@keyframes radarPulse {
+  0%,100%{ box-shadow: 0 0 0 0 rgba(255,107,0,0.4); }
+  50%{ box-shadow: 0 0 0 20px rgba(255,107,0,0); }
+}
+.detect-label {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: rgba(255,255,255,0.9);
+}
+.detect-sub {
+  font-size: 12px; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.detect-dots { display: flex; gap: 6px; margin-top: .4rem; }
+.detect-dots span {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--saffron); opacity: 0.3;
+  animation: ddot 1.2s infinite ease-in-out;
+}
+.detect-dots span:nth-child(2){ animation-delay: .2s; }
+.detect-dots span:nth-child(3){ animation-delay: .4s; }
+@keyframes ddot{ 0%,80%,100%{opacity:.2} 40%{opacity:1} }
+
+/* ═══ DETECTION RESULT BANNER ═══ */
+.detect-banner {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px; padding: 10px 16px;
+  margin-bottom: 1.2rem;
+  animation: fadeUp 0.5s ease forwards;
+  max-width: 400px; width: 100%;
+}
+.detect-banner .db-icon { font-size: 22px; }
+.detect-banner .db-text { flex: 1; }
+.detect-banner .db-title {
+  font-size: 12px; font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 2px;
+}
+.detect-banner .db-sub { font-size: 10px; color: rgba(255,255,255,0.45); }
+.detect-banner .db-badge {
+  font-size: 9px; font-weight: 700;
+  padding: 3px 8px; border-radius: 20px;
+  letter-spacing: .05em;
+}
+.detect-banner.smart { border-color: rgba(46,204,113,0.35); background: rgba(46,204,113,0.08); }
+.detect-banner.smart .db-badge { background: rgba(46,204,113,0.2); color: var(--green2); }
+.detect-banner.keypad { border-color: rgba(255,107,0,0.35); background: rgba(255,107,0,0.08); }
+.detect-banner.keypad .db-badge { background: rgba(255,107,0,0.2); color: var(--saffron2); }
+
+/* ═══ CARD STATES FOR DETECTION ═══ */
+.mode-card.detected {
+  transform: scale(1.04);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.25);
+}
+.mode-card.detected.smartphone {
+  border-color: var(--green2);
+  background: rgba(27,107,58,0.22);
+}
+.mode-card.detected.keypad {
+  border-color: var(--saffron);
+  background: rgba(255,107,0,0.22);
+}
+.mode-card.not-detected {
+  opacity: 0.45;
+  filter: grayscale(0.4);
+  cursor: not-allowed;
+}
+.mode-card.not-detected:hover {
+  transform: none;
+  box-shadow: none;
+}
+.detected-check {
+  position: absolute; top: 10px; right: 10px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--green2); color: #fff;
+  font-size: 12px; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; box-shadow: 0 2px 8px rgba(46,204,113,0.4);
+}
+.mode-card.keypad.detected .detected-check {
+  background: var(--saffron);
+  box-shadow: 0 2px 8px rgba(255,107,0,0.4);
+}
+.not-detected-label {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(0,0,0,0.5);
+  color: rgba(255,255,255,0.5);
+  font-size: 9px; font-weight: 600;
+  padding: 2px 7px; border-radius: 20px;
+  letter-spacing: .04em;
+}
+.auto-enter-bar {
+  width: 100%; max-width: 400px;
+  margin-top: .6rem;
+  animation: fadeUp 0.5s ease 0.3s forwards; opacity: 0;
+}
+.auto-enter-btn {
+  width: 100%; padding: 14px;
+  border: none; border-radius: 16px;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.auto-enter-btn.smart {
+  background: linear-gradient(135deg, var(--green), var(--green2));
+  color: #fff; box-shadow: 0 6px 24px rgba(27,107,58,0.35);
+}
+.auto-enter-btn.smart:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(27,107,58,0.45); }
+.auto-enter-btn.keypad {
+  background: linear-gradient(135deg, var(--saffron), var(--saffron2));
+  color: #fff; box-shadow: 0 6px 24px rgba(255,107,0,0.35);
+}
+.auto-enter-btn.keypad:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(255,107,0,0.45); }
+.manual-link {
+  text-align: center; margin-top: .7rem;
+  font-size: 11px; color: rgba(255,255,255,0.35);
+  cursor: pointer; transition: color .2s;
+}
+.manual-link:hover { color: rgba(255,255,255,0.65); }
+.countdown-bar {
+  height: 3px; background: rgba(255,255,255,0.1);
+  border-radius: 2px; margin-top: .5rem; overflow: hidden;
+}
+.countdown-fill {
+  height: 100%; background: var(--green2);
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+.countdown-fill.keypad { background: var(--saffron); }
+
+@keyframes pulse-dot{0%,100%{r:8;opacity:.8}50%{r:14;opacity:.2}}
+.pdot{animation:pulse-dot 2.2s ease-in-out infinite;}
+
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-thumb{background:var(--g300);border-radius:2px;}
+</style>
+</head>
+<body>
+
+<!-- ══════════ DEVICE DETECTION SPLASH ══════════ -->
+<div class="detect-splash" id="detectSplash">
+  <div class="detect-radar" id="detectRadarIcon">📡</div>
+  <div class="detect-label" id="detectLabel">Detecting your device…</div>
+  <div class="detect-sub">आपका फोन पहचान रहे हैं</div>
+  <div class="detect-dots"><span></span><span></span><span></span></div>
+</div>
+
+<!-- ══════════ LANDING — CHOOSE YOUR PHONE ══════════ -->
+<div class="landing" id="landing" style="display: none;">
+  <div class="brand">
+    <div class="brand-logo">🌾</div>
+    <div class="brand-name">GramVaani</div>
+    <div class="brand-tagline">Government Schemes · 13 Languages · Any Phone</div>
+  </div>
+
+  <!-- Detection result banner — filled by JS -->
+  <div class="detect-banner" id="detectBanner" style="display:none;"></div>
+
+  <div class="mode-title">What type of phone are you using?</div>
+  <div class="mode-sub">आप किस फोन का उपयोग कर रहे हैं?</div>
+
+  <div class="mode-cards">
+    <div class="mode-card keypad" id="cardKeypad" onclick="onCardClick('keypad')">
+      <span class="mode-icon">📟</span>
+      <div class="mode-label">Keypad Phone</div>
+      <div class="mode-desc">Basic phone with buttons. 2G network. No internet needed.</div>
+      <div class="mode-badge">IVR + SMS</div>
+    </div>
+    <div class="mode-card smartphone" id="cardSmartphone" onclick="onCardClick('smartphone')">
+      <span class="mode-icon">📱</span>
+      <div class="mode-label">Smartphone</div>
+      <div class="mode-desc">Touchscreen Android or iPhone with internet.</div>
+      <div class="mode-badge">Full Voice App</div>
+    </div>
+  </div>
+
+  <!-- Auto-enter button — filled by JS -->
+  <div class="auto-enter-bar" id="autoEnterBar" style="display:none;">
+    <button class="auto-enter-btn" id="autoEnterBtn" onclick="autoEnter()"></button>
+    <div class="countdown-bar"><div class="countdown-fill" id="countdownFill" style="width:100%;"></div></div>
+    <div class="manual-link" onclick="showManualSelect()">🔄 That's not my device — let me choose manually</div>
+  </div>
+
+  <!-- Language pre-select -->
+  <div class="lang-row" id="landingLangs">
+    <div class="lang-chip sel" onclick="selLandingLang(&#39;en&#39;,this)">English</div>
+    <div class="lang-chip " onclick="selLandingLang(&#39;hi&#39;,this)">हिंदी</div>
+    <div class="lang-chip " onclick="selLandingLang(&#39;ta&#39;,this)">தமிழ்</div>
+    <div class="lang-chip " onclick="selLandingLang(&#39;te&#39;,this)">తెలుగు</div>
+    <div class="lang-chip " onclick="selLandingLang(&#39;kn&#39;,this)">ಕನ್ನಡ</div>
+    <div class="lang-chip " onclick="selLandingLang(&#39;bn&#39;,this)">বাংলা</div>
+    <div class="lang-chip " onclick="selLandingLang(&#39;mr&#39;,this)">मराठी</div>
+    <div class="lang-chip " onclick="selLandingLang(&#39;gu&#39;,this)">ગુજરાતી</div>
+    <div class="lang-chip " onclick="selLandingLang(&#39;pa&#39;,this)">ਪੰਜਾਬੀ</div>
+    <div class="lang-chip " onclick="selLandingLang(&#39;ml&#39;,this)">മലയാളം</div>
+    <div class="lang-chip " onclick="selLandingLang(&#39;or&#39;,this)">ଓଡ଼ିଆ</div>
+    <div class="lang-chip " onclick="selLandingLang(&#39;as&#39;,this)">অসমীয়া</div>
+    <div class="lang-chip " onclick="selLandingLang(&#39;ur&#39;,this)">اردو</div></div>
+</div>
+
+<!-- ══════════ KEYPAD PHONE VIEW ══════════ -->
+<div class="keypad-view" id="keypadView">
+  <div class="phone-shell">
+
+    <!-- Phone top bar (simulated) -->
+    <div class="phone-topbar">
+      <div class="phone-signal">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <span style="font-size:13px;">📶 2G</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <span id="kpTime">18:26</span>
+        <span class="phone-battery">🔋</span>
+      </div>
+    </div>
+
+    <!-- IVR Call screen -->
+    <div id="ivrCallScreen">
+      <div class="call-screen">
+        <div class="call-status-badge">
+          <div class="call-dot"></div>
+          <span id="callStatusText">Call Connected — 1800-XXX-XXXX</span>
+        </div>
+        <div class="ivr-display" id="ivrDisplay">
+          <div class="ivr-line highlight">📞 GramVaani Toll-Free IVR</div>
+          <div class="ivr-line">Namaste! Welcome to GramVaani.</div>
+          <div class="ivr-line press">Press 1️⃣ for Hindi</div>
+          <div class="ivr-line press">Press 2️⃣ for English</div>
+          <div class="ivr-line press">Press 3️⃣ for Tamil</div>
+          <div class="ivr-line press">Press 4️⃣ for Telugu</div>
+          <div class="ivr-line press">Press 5️⃣ for Kannada</div>
+          <div class="ivr-line press">Press 6️⃣ for Bengali</div>
+          <div class="ivr-line press">Press 9️⃣ for More languages</div>
+          <div class="ivr-line press">Press 0️⃣ for Live Agent</div>
+        </div>
+        <div class="ivr-input-display" id="ivrInputDisplay">
+          <span id="ivrKeys">—</span>
+          <span class="cursor-blink">|</span>
+        </div>
+      </div>
+
+      <!-- Keypad -->
+      <div class="keypad-grid">
+        <div class="key" onclick="pressKey(&#39;1&#39;)"><div class="key-num">1</div><div class="key-alpha"></div></div>
+        <div class="key" onclick="pressKey(&#39;2&#39;)"><div class="key-num">2</div><div class="key-alpha">ABC</div></div>
+        <div class="key" onclick="pressKey(&#39;3&#39;)"><div class="key-num">3</div><div class="key-alpha">DEF</div></div>
+        <div class="key" onclick="pressKey(&#39;4&#39;)"><div class="key-num">4</div><div class="key-alpha">GHI</div></div>
+        <div class="key" onclick="pressKey(&#39;5&#39;)"><div class="key-num">5</div><div class="key-alpha">JKL</div></div>
+        <div class="key" onclick="pressKey(&#39;6&#39;)"><div class="key-num">6</div><div class="key-alpha">MNO</div></div>
+        <div class="key" onclick="pressKey(&#39;7&#39;)"><div class="key-num">7</div><div class="key-alpha">PQRS</div></div>
+        <div class="key" onclick="pressKey(&#39;8&#39;)"><div class="key-num">8</div><div class="key-alpha">TUV</div></div>
+        <div class="key" onclick="pressKey(&#39;9&#39;)"><div class="key-num">9</div><div class="key-alpha">WXYZ</div></div>
+        <div class="key" onclick="pressKey(&#39;*&#39;)"><div class="key-num">*</div></div>
+        <div class="key" onclick="pressKey(&#39;0&#39;)"><div class="key-num">0</div><div class="key-alpha">+</div></div>
+        <div class="key" onclick="pressKey(&#39;#&#39;)"><div class="key-num">#</div></div>
+        <!-- Row 4 -->
+        <div class="key call-key" onclick="dialCall()"><div class="key-num">📞</div></div>
+        <div class="key" onclick="pressKey(&#39;⌫&#39;)"><div class="key-num" style="font-size:18px;">⌫</div></div>
+        <div class="key end-key" onclick="endCall()"><div class="key-num">📵</div></div>
+      </div>
+
+      <div class="keypad-bottom">
+        <div class="back-btn-kp" onclick="goLanding()">← Back</div>
+        <div class="sms-btn" onclick="openSMSView()">📩 SMS Mode</div>
+      </div>
+    </div>
+
+    <!-- SMS view on keypad phone -->
+    <div class="sms-view" id="smsView">
+      <div class="sms-header">
+        <span>📩</span>
+        <span>SMS to 7738299899</span>
+        <span style="margin-left:auto;font-size:11px;color:rgba(255,255,255,.4);cursor:pointer;" onclick="closeSMSView()">← IVR</span>
+      </div>
+      <div class="sms-messages" id="smsMessages">
+        <div class="sms-bubble recv">
+          <div class="from">GramVaani (7738299899)</div>
+          Welcome! Send KISAN for farming, SEHAT for health, AWAS for housing, HELP for all schemes. Reply in any language.
+        </div>
+      </div>
+      <div class="sms-input-row">
+        <input class="sms-txt" id="smsTxt" placeholder="Type KISAN, SEHAT, HELP…" onkeydown="if(event.key===&#39;Enter&#39;)sendSMS()">
+        <button class="sms-send-btn" onclick="sendSMS()">➤</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════ SMARTPHONE VIEW ══════════ -->
+<div class="smartphone-view active" id="smartphoneView">
+
+  <!-- Nav -->
+  <nav class="snav">
+    <div class="snav-brand">
+      <div class="snav-logo">🌾</div>
+      <div>
+        <div class="snav-title">GramVaani</div>
+        <div class="snav-sub">13 Languages · Microsoft Voice</div>
+      </div>
+    </div>
+    <div class="snav-right">
+      <button class="snav-btn toll" onclick="showSTab(&#39;tollfree&#39;)">📞 Toll Free</button>
+      <button class="snav-btn admin" onclick="showAdmin()">🛡️ Admin</button>
+    </div>
+  </nav>
+
+  <!-- Tabs -->
+  <div class="stabs" id="stabs" style="display: flex;">
+    <div class="stab" id="stab-voice" onclick="showSTab(&#39;voice&#39;)">🎙️ Voice AI</div>
+    <div class="stab active" id="stab-schemes" onclick="showSTab(&#39;schemes&#39;)">🏛️ Schemes</div>
+    <div class="stab" id="stab-tollfree" onclick="showSTab(&#39;tollfree&#39;)">📞 Toll Free</div>
+    <div class="stab" id="stab-partner" onclick="showSTab(&#39;partner&#39;)">🤝 Partner</div>
+    <div class="stab" id="stab-language" onclick="showSTab(&#39;language&#39;)">🌐 Language</div>
+  </div>
+
+  <!-- VOICE TAB -->
+  <div class="sscreen" id="ss-voice">
+    <div class="voice-center">
+      <div class="lang-pill" onclick="showSTab(&#39;language&#39;)">
+        <span id="langDisplay">🌐 English</span><span style="font-size:9px;opacity:.6">▼</span>
+      </div>
+      <div class="rec-badge" id="recBadge"><div class="rec-dot"></div>RECORDING</div>
+      <div class="orb-wrap" id="orbWrap">
+        <div class="vring r1"></div><div class="vring r2"></div><div class="vring r3"></div>
+        <div class="orb" id="voiceOrb" onclick="toggleVoice()">
+          <span class="orb-icon" id="orbIcon">🎙️</span>
+          <span class="orb-st" id="orbSt">TAP TO SPEAK</span>
+        </div>
+      </div>
+      <p class="voice-hint" id="voiceHint">Tap mic · speak in your language</p>
+    </div>
+
+    <div class="tts-bar">
+      <span class="tts-lbl">🪟 Voice</span>
+      <select class="tts-sel" id="ttsVoiceSel" onchange="onVoiceChange()"><option value="0">🪟 Microsoft David - English (United States) (en-US)</option><option value="1">🪟 Microsoft Mark - English (United States) (en-US)</option><option value="2">🪟 Microsoft Zira - English (United States) (en-US)</option><option value="3">Google Deutsch (de-DE)</option><option value="4">Google US English (en-US)</option><option value="5">Google UK English Female (en-GB)</option><option value="6">Google UK English Male (en-GB)</option><option value="7">Google español (es-ES)</option><option value="8">Google español de Estados Unidos (es-US)</option><option value="9">Google français (fr-FR)</option><option value="10">Google हिन्दी (hi-IN)</option><option value="11">Google Bahasa Indonesia (id-ID)</option><option value="12">Google italiano (it-IT)</option><option value="13">Google 日本語 (ja-JP)</option><option value="14">Google 한국의 (ko-KR)</option><option value="15">Google Nederlands (nl-NL)</option><option value="16">Google polski (pl-PL)</option><option value="17">Google português do Brasil (pt-BR)</option><option value="18">Google русский (ru-RU)</option><option value="19">Google&nbsp;普通话（中国大陆） (zh-CN)</option><option value="20">Google&nbsp;粤語（香港） (zh-HK)</option><option value="21">Google 國語（臺灣） (zh-TW)</option><option value="22">Chrome OS US English 1 (en-US)</option><option value="23">Chrome OS US English 2 (en-US)</option><option value="24">Chrome OS US English 3 (en-US)</option><option value="25">Chrome OS US English 4 (en-US)</option><option value="26">Chrome OS US English 5 (en-US)</option><option value="27">Chrome OS US English 6 (en-US)</option><option value="28">Chrome OS US English 7 (en-US)</option><option value="29">Chrome OS US English 8 (en-US)</option><option value="30">Google US English 1 (Natural) (en-US)</option><option value="31">Google US English 2 (Natural) (en-US)</option><option value="32">Google US English 3 (Natural) (en-US)</option><option value="33">Google US English 4 (Natural) (en-US)</option><option value="34">Google US English 5 (Natural) (en-US)</option><option value="35">Google US English 6 (Natural) (en-US)</option><option value="36">Google US English 7 (Natural) (en-US)</option></select>
+      <button class="tts-btn speak" onclick="testSpeak()">▶ Speak</button>
+      <button class="tts-btn listen" onclick="startListening()">🎤 Listen</button>
+    </div>
+
+    <div class="chat-area" id="chatArea"><div class="bubble ai"><span class="ai-lbl">GRAMVAANI AI · MICROSOFT VOICE</span>👋 Welcome to GramVaani! Ask me about PM Kisan, Ayushman Bharat, e-Shram, Jan Dhan, MGNREGS, and more. Tap 🎤 Listen or type below. I speak in 13 languages with Microsoft Neural Voice!</div></div>
+
+    <div class="txt-row">
+      <input class="txt-in" id="txtIn" placeholder="Type your question…" onkeydown="if(event.key===&#39;Enter&#39;)sendTxt()">
+      <button class="send-btn" onclick="sendTxt()">➤</button>
+    </div>
+
+    <div class="ql">Common Questions</div>
+    <div class="qp" id="qp"><button class="qbtn" onclick="askQ(&#39;How to apply for PM Kisan?&#39;">🌾 How to apply for PM Kisan?</button><button class="qbtn" onclick="askQ(&#39;How to get Ayushman Bharat card?&#39;">🏥 How to get Ayushman Bharat card?</button><button class="qbtn" onclick="askQ(&#39;What schemes am I eligible for?&#39;">💰 What schemes am I eligible for?</button></div>
+  </div>
+
+  <!-- LANGUAGE TAB -->
+  <div class="sscreen" id="ss-language">
+    <div style="text-align:center;margin-bottom:1.2rem;">
+      <h2 style="font-family:&#39;Baloo 2&#39;,sans-serif;font-size:20px;font-weight:800;margin-bottom:3px;">अपनी भाषा चुनें</h2>
+      <p style="font-size:12px;color:var(--g500);">Choose your language — 13 supported</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.2rem;" id="langGrid">
+    <div style="background:var(--white);border:2px solid var(--green);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:#E8F5EE;" onclick="selLang(&#39;en&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">English</span>
+      <span style="font-size:10px;color:var(--g500);">English</span>
+    </div>
+    <div style="background:var(--white);border:2px solid var(--g100);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);" onclick="selLang(&#39;hi&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">हिंदी</span>
+      <span style="font-size:10px;color:var(--g500);">Hindi</span>
+    </div>
+    <div style="background:var(--white);border:2px solid var(--g100);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);" onclick="selLang(&#39;ta&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">தமிழ்</span>
+      <span style="font-size:10px;color:var(--g500);">Tamil</span>
+    </div>
+    <div style="background:var(--white);border:2px solid var(--g100);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);" onclick="selLang(&#39;te&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">తెలుగు</span>
+      <span style="font-size:10px;color:var(--g500);">Telugu</span>
+    </div>
+    <div style="background:var(--white);border:2px solid var(--g100);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);" onclick="selLang(&#39;kn&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">ಕನ್ನಡ</span>
+      <span style="font-size:10px;color:var(--g500);">Kannada</span>
+    </div>
+    <div style="background:var(--white);border:2px solid var(--g100);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);" onclick="selLang(&#39;bn&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">বাংলা</span>
+      <span style="font-size:10px;color:var(--g500);">Bengali</span>
+    </div>
+    <div style="background:var(--white);border:2px solid var(--g100);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);" onclick="selLang(&#39;mr&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">मराठी</span>
+      <span style="font-size:10px;color:var(--g500);">Marathi</span>
+    </div>
+    <div style="background:var(--white);border:2px solid var(--g100);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);" onclick="selLang(&#39;gu&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">ગુજરાતી</span>
+      <span style="font-size:10px;color:var(--g500);">Gujarati</span>
+    </div>
+    <div style="background:var(--white);border:2px solid var(--g100);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);" onclick="selLang(&#39;pa&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">ਪੰਜਾਬੀ</span>
+      <span style="font-size:10px;color:var(--g500);">Punjabi</span>
+    </div>
+    <div style="background:var(--white);border:2px solid var(--g100);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);" onclick="selLang(&#39;ml&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">മലയാളം</span>
+      <span style="font-size:10px;color:var(--g500);">Malayalam</span>
+    </div>
+    <div style="background:var(--white);border:2px solid var(--g100);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);" onclick="selLang(&#39;or&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">ଓଡ଼ିଆ</span>
+      <span style="font-size:10px;color:var(--g500);">Odia</span>
+    </div>
+    <div style="background:var(--white);border:2px solid var(--g100);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);" onclick="selLang(&#39;as&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">অসমীয়া</span>
+      <span style="font-size:10px;color:var(--g500);">Assamese</span>
+    </div>
+    <div style="background:var(--white);border:2px solid var(--g100);border-radius:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);" onclick="selLang(&#39;ur&#39;,this)">
+      <span style="font-size:15px;font-weight:700;display:block;color:var(--navy);">اردو</span>
+      <span style="font-size:10px;color:var(--g500);">Urdu</span>
+    </div></div>
+    <button onclick="confirmLang()" style="width:100%;padding:13px;background:var(--green);color:#fff;font-size:14px;font-weight:700;border:none;border-radius:var(--radius);cursor:pointer;font-family:&#39;Noto Sans&#39;,sans-serif;">✓ Confirm Language</button>
+  </div>
+
+  <!-- SCHEMES TAB -->
+  <div class="sscreen active" id="ss-schemes" style="display: block;">
+    <div class="srch-bar">
+      <span>🔍</span>
+      <input type="text" placeholder="Search schemes…" id="schemeSearch" oninput="filterSchemes()">
+    </div>
+    <div class="scats">
+      <div class="scat active" onclick="filterCat(&#39;all&#39;,this)">All</div>
+      <div class="scat" onclick="filterCat(&#39;agri&#39;,this)">🌾 Agriculture</div>
+      <div class="scat" onclick="filterCat(&#39;health&#39;,this)">🏥 Health</div>
+      <div class="scat" onclick="filterCat(&#39;finance&#39;,this)">💰 Finance</div>
+      <div class="scat" onclick="filterCat(&#39;labor&#39;,this)">👷 Labor</div>
+    </div>
+    <div class="slist" id="schemeList">
+    <div class="scard agri" onclick="openScheme(1)">
+      <div class="s-top"><div class="s-name">PM Kisan Samman Nidhi</div><div class="s-tag">Agriculture</div></div>
+      <div class="s-desc">₹6,000/year direct cash to farmer families in 3 installments of ₹2,000.</div>
+      <div class="s-bot">
+        <span class="s-badge">💰 ₹6,000/year</span>
+        <span class="s-badge">📞 155261</span>
+        <span class="s-badge">📱 SMS: KISAN</span>
+        <button class="ask-ai" onclick="event.stopPropagation();askAbout(&#39;PM Kisan Samman Nidhi&#39;)">Ask AI</button>
+      </div>
+    </div>
+    <div class="scard health" onclick="openScheme(2)">
+      <div class="s-top"><div class="s-name">Ayushman Bharat PM-JAY</div><div class="s-tag">Health</div></div>
+      <div class="s-desc">Free health insurance up to ₹5 lakh per family per year.</div>
+      <div class="s-bot">
+        <span class="s-badge">💰 ₹5 lakh insurance</span>
+        <span class="s-badge">📞 14555</span>
+        <span class="s-badge">📱 SMS: SEHAT</span>
+        <button class="ask-ai" onclick="event.stopPropagation();askAbout(&#39;Ayushman Bharat PM-JAY&#39;)">Ask AI</button>
+      </div>
+    </div>
+    <div class="scard finance" onclick="openScheme(3)">
+      <div class="s-top"><div class="s-name">PM Jan Dhan Yojana</div><div class="s-tag">Finance</div></div>
+      <div class="s-desc">Zero-balance bank account with RuPay card, ₹10,000 overdraft.</div>
+      <div class="s-bot">
+        <span class="s-badge">💰 ₹10,000 overdraft</span>
+        <span class="s-badge">📞 1800-11-0001</span>
+        <span class="s-badge">📱 SMS: BANK</span>
+        <button class="ask-ai" onclick="event.stopPropagation();askAbout(&#39;PM Jan Dhan Yojana&#39;)">Ask AI</button>
+      </div>
+    </div>
+    <div class="scard labor" onclick="openScheme(4)">
+      <div class="s-top"><div class="s-name">e-Shram Card</div><div class="s-tag">Labor</div></div>
+      <div class="s-desc">₹2 lakh accident insurance for unorganized sector workers.</div>
+      <div class="s-bot">
+        <span class="s-badge">💰 ₹2 lakh insurance</span>
+        <span class="s-badge">📞 14434</span>
+        <span class="s-badge">📱 SMS: SHRAM</span>
+        <button class="ask-ai" onclick="event.stopPropagation();askAbout(&#39;e-Shram Card&#39;)">Ask AI</button>
+      </div>
+    </div>
+    <div class="scard agri" onclick="openScheme(5)">
+      <div class="s-top"><div class="s-name">PM Fasal Bima Yojana</div><div class="s-tag">Agriculture</div></div>
+      <div class="s-desc">Crop insurance covering losses from natural calamities.</div>
+      <div class="s-bot">
+        <span class="s-badge">💰 Crop loss coverage</span>
+        <span class="s-badge">📞 18001801551</span>
+        <span class="s-badge">📱 SMS: BIMA</span>
+        <button class="ask-ai" onclick="event.stopPropagation();askAbout(&#39;PM Fasal Bima Yojana&#39;)">Ask AI</button>
+      </div>
+    </div>
+    <div class="scard finance" onclick="openScheme(6)">
+      <div class="s-top"><div class="s-name">PM Awas Yojana Gramin</div><div class="s-tag">Housing</div></div>
+      <div class="s-desc">₹1.2–1.3 lakh housing subsidy for rural BPL families.</div>
+      <div class="s-bot">
+        <span class="s-badge">💰 ₹1.3 lakh subsidy</span>
+        <span class="s-badge">📞 1800-11-6446</span>
+        <span class="s-badge">📱 SMS: AWAS</span>
+        <button class="ask-ai" onclick="event.stopPropagation();askAbout(&#39;PM Awas Yojana Gramin&#39;)">Ask AI</button>
+      </div>
+    </div>
+    <div class="scard labor" onclick="openScheme(7)">
+      <div class="s-top"><div class="s-name">MGNREGS</div><div class="s-tag">Employment</div></div>
+      <div class="s-desc">100 days guaranteed employment per year for rural households.</div>
+      <div class="s-bot">
+        <span class="s-badge">💰 100 days employment</span>
+        <span class="s-badge">📞 1800-11-0707</span>
+        <span class="s-badge">📱 SMS: NREGA</span>
+        <button class="ask-ai" onclick="event.stopPropagation();askAbout(&#39;MGNREGS&#39;)">Ask AI</button>
+      </div>
+    </div>
+    <div class="scard health" onclick="openScheme(8)">
+      <div class="s-top"><div class="s-name">PM Ujjwala Yojana</div><div class="s-tag">Health</div></div>
+      <div class="s-desc">Free LPG connection for BPL women for clean cooking.</div>
+      <div class="s-bot">
+        <span class="s-badge">💰 Free LPG connection</span>
+        <span class="s-badge">📞 1906</span>
+        <span class="s-badge">📱 SMS: LPG</span>
+        <button class="ask-ai" onclick="event.stopPropagation();askAbout(&#39;PM Ujjwala Yojana&#39;)">Ask AI</button>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- TOLL FREE TAB -->
+  <div class="sscreen" id="ss-tollfree">
+    <div class="toll-hero-sm">
+      <div style="font-size:11px;color:rgba(255,255,255,.6);">GOVT OF INDIA · FREE HELPLINE</div>
+      <div class="toll-num">1800-XXX-XXXX</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.8);">24×7 · 13 Languages · Works on ANY Phone</div>
+    </div>
+    <button class="call-btn" onclick="showToast(&#39;📞 Calling 1800-XXX-XXXX…&#39;)">📞 Call Now (Free)</button>
+    <div style="font-size:10px;font-weight:700;color:var(--g500);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.7rem;">IVR Steps</div>
+    <div>
+      <div class="ivr-stp"><div class="ivr-n">1</div><div><div class="ivr-t">Dial 1800-XXX-XXXX from any phone</div><div class="ivr-s">Free · 2G · No internet needed</div></div></div>
+      <div class="ivr-stp"><div class="ivr-n">2</div><div><div class="ivr-t">Press 1=Hindi · 2=English · 3=Tamil…</div><div class="ivr-s">13 languages · press keypad number</div></div></div>
+      <div class="ivr-stp"><div class="ivr-n">3</div><div><div class="ivr-t">Press 1=Farming · 2=Health · 3=Bank · 4=Housing</div><div class="ivr-s">Navigate with keypad buttons</div></div></div>
+      <div class="ivr-stp"><div class="ivr-n">4</div><div><div class="ivr-t">Microsoft Neural TTS speaks the answer</div><div class="ivr-s">Clear natural voice · or press 0 for live agent</div></div></div>
+      <div class="ivr-stp"><div class="ivr-n">5</div><div><div class="ivr-t">SMS summary sent · call recorded</div><div class="ivr-s">Admin can view full transcript &amp; recording</div></div></div>
+    </div>
+    <br>
+    <div style="background:#E8F5EE;border:1px solid #A8DFC0;border-radius:var(--radius);padding:.9rem;">
+      <h4 style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:5px;">📱 SMS on Keypad Phone</h4>
+      <p style="font-size:11px;color:var(--g700);line-height:1.6;">Send <strong>KISAN</strong> · <strong>SEHAT</strong> · <strong>AWAS</strong> · <strong>HELP</strong> to <strong>7738299899</strong></p>
+    </div>
+  </div>
+
+  <!-- PARTNER TAB -->
+  <div class="sscreen" id="ss-partner">
+    <div style="background:var(--navy);border-radius:var(--radius);padding:1.2rem;margin-bottom:1.2rem;color:#fff;">
+      <h2 style="font-family:&#39;Baloo 2&#39;,sans-serif;font-size:18px;font-weight:800;margin-bottom:3px;">AI Lead Conversion</h2>
+      <p style="font-size:12px;color:rgba(255,255,255,.6);">Automated voice outreach · partner enrollment</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.2rem;">
+      <div class="kpi" style="background:var(--white);border:1px solid var(--g100);"><div class="kpi-n g">2.4k</div><div class="kpi-l">Leads</div></div>
+      <div class="kpi" style="background:var(--white);border:1px solid var(--g100);"><div class="kpi-n" style="color:var(--blue);">68%</div><div class="kpi-l">Response</div></div>
+      <div class="kpi" style="background:var(--white);border:1px solid var(--g100);"><div class="kpi-n o">312</div><div class="kpi-l">Converted</div></div>
+    </div>
+    <div id="leadList">
+    <div style="background:var(--white);border:1px solid var(--g100);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+        <div style="font-size:13px;font-weight:700;">Ramesh Kumar</div>
+        <div style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:9px;background:#FEE8E8;color:#C04040;">HOT</div>
+      </div>
+      <div style="font-size:11px;color:var(--g500);margin-bottom:7px;">📍 Pune Rural · 🏛️ PM Kisan · 📟 Keypad</div>
+      <div style="display:flex;gap:6px;">
+        <button onclick="showToast(&#39;📞 AI calling Ramesh Kumar…&#39;)" style="flex:1;padding:6px;font-size:11px;font-weight:500;border-radius:7px;background:var(--green);color:#fff;border:none;cursor:pointer;font-family:&#39;Noto Sans&#39;,sans-serif;">📞 Call</button>
+        <button onclick="showToast(&#39;📩 SMS sent to Ramesh Kumar!&#39;)" style="flex:1;padding:6px;font-size:11px;font-weight:500;border-radius:7px;background:#fff;color:var(--saffron);border:1.5px solid var(--saffron);cursor:pointer;font-family:&#39;Noto Sans&#39;,sans-serif;">📩 SMS</button>
+        <button onclick="showToast(&#39;💬 WhatsApp to Ramesh Kumar!&#39;)" style="flex:1;padding:6px;font-size:11px;font-weight:500;border-radius:7px;background:#fff;color:#25D366;border:1.5px solid #25D366;cursor:pointer;font-family:&#39;Noto Sans&#39;,sans-serif;">💬 WA</button>
+      </div>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--g100);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+        <div style="font-size:13px;font-weight:700;">Sunita Devi</div>
+        <div style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:9px;background:#FFF3E8;color:#C06010;">WARM</div>
+      </div>
+      <div style="font-size:11px;color:var(--g500);margin-bottom:7px;">📍 Nashik · 🏛️ Ayushman Bharat · 📟 Keypad</div>
+      <div style="display:flex;gap:6px;">
+        <button onclick="showToast(&#39;📞 AI calling Sunita Devi…&#39;)" style="flex:1;padding:6px;font-size:11px;font-weight:500;border-radius:7px;background:var(--green);color:#fff;border:none;cursor:pointer;font-family:&#39;Noto Sans&#39;,sans-serif;">📞 Call</button>
+        <button onclick="showToast(&#39;📩 SMS sent to Sunita Devi!&#39;)" style="flex:1;padding:6px;font-size:11px;font-weight:500;border-radius:7px;background:#fff;color:var(--saffron);border:1.5px solid var(--saffron);cursor:pointer;font-family:&#39;Noto Sans&#39;,sans-serif;">📩 SMS</button>
+        <button onclick="showToast(&#39;💬 WhatsApp to Sunita Devi!&#39;)" style="flex:1;padding:6px;font-size:11px;font-weight:500;border-radius:7px;background:#fff;color:#25D366;border:1.5px solid #25D366;cursor:pointer;font-family:&#39;Noto Sans&#39;,sans-serif;">💬 WA</button>
+      </div>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--g100);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+        <div style="font-size:13px;font-weight:700;">Mohan Singh</div>
+        <div style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:9px;background:var(--g50);color:var(--g500);">COLD</div>
+      </div>
+      <div style="font-size:11px;color:var(--g500);margin-bottom:7px;">📍 Jaipur Rural · 🏛️ Jan Dhan · 📟 Keypad</div>
+      <div style="display:flex;gap:6px;">
+        <button onclick="showToast(&#39;📞 AI calling Mohan Singh…&#39;)" style="flex:1;padding:6px;font-size:11px;font-weight:500;border-radius:7px;background:var(--green);color:#fff;border:none;cursor:pointer;font-family:&#39;Noto Sans&#39;,sans-serif;">📞 Call</button>
+        <button onclick="showToast(&#39;📩 SMS sent to Mohan Singh!&#39;)" style="flex:1;padding:6px;font-size:11px;font-weight:500;border-radius:7px;background:#fff;color:var(--saffron);border:1.5px solid var(--saffron);cursor:pointer;font-family:&#39;Noto Sans&#39;,sans-serif;">📩 SMS</button>
+        <button onclick="showToast(&#39;💬 WhatsApp to Mohan Singh!&#39;)" style="flex:1;padding:6px;font-size:11px;font-weight:500;border-radius:7px;background:#fff;color:#25D366;border:1.5px solid #25D366;cursor:pointer;font-family:&#39;Noto Sans&#39;,sans-serif;">💬 WA</button>
+      </div>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--g100);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+        <div style="font-size:13px;font-weight:700;">Lakshmi Bai</div>
+        <div style="font-size:10px;font-weight:600;padding:2px 7
